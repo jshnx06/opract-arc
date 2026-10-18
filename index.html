@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opract Edu | Professional Websites for Educational Institutions</title>
+  <meta name="description" content="Opract Edu builds and manages professional websites for schools, colleges, universities, and coaching centers. Notices, events, gallery, admissions — everything your institution needs online.">
+  <link rel="canonical" href="https://edu.opract.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://edu.opract.com/">
+  <meta property="og:title" content="Opract Edu | Professional Websites for Educational Institutions">
+  <meta property="og:description" content="We build and fully manage websites for schools, colleges, and coaching centers. You focus on education — we handle the tech.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f8fafb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8fafb;
+      --bg-alt: #f0fdf9;
+      --bg-dark: #071a17;
+      --bg-card: #ffffff;
+      --accent: #0f766e;
+      --accent-hover: #0d5c56;
+      --accent-soft: rgba(15, 118, 110, .06);
+      --accent-glow: rgba(15, 118, 110, .1);
+      --accent-light: #ccfbf1;
+      --ink: #0f1720;
+      --ink-2: #475569;
+      --ink-3: #94a3b8;
+      --border: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --font-h: 'Sora', sans-serif;
+      --font-b: 'Lexend', sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shell: 1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .shell { max-width: var(--shell); margin: 0 auto; padding: 0 24px; }
+
+    /* ---- DOT GRID BACKGROUND ---- */
+    .dot-grid {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(15,118,110,.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 14px 0;
+      background: rgba(248,250,251,.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: box-shadow .3s, padding .3s;
+    }
+    .nav.scrolled {
+      box-shadow: 0 1px 0 var(--border);
+      padding: 10px 0;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-h); font-size: 1.3rem;
+      font-weight: 600; color: var(--ink); letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--accent); font-weight: 400; }
+    .nav-links {
+      display: flex; gap: 32px; align-items: center;
+    }
+    .nav-link {
+      font-family: var(--font-b); font-size: .875rem;
+      color: var(--ink-2); font-weight: 400;
+      transition: color .2s; letter-spacing: .01em;
+    }
+    .nav-link:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--font-h); font-size: .85rem;
+      font-weight: 500; color: #fff;
+      background: var(--accent); padding: 10px 22px;
+      border-radius: 50px; letter-spacing: .01em;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; position: relative;
+    }
+    .nav-toggle span {
+      display: block; width: 100%; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      position: absolute; left: 0; transition: .3s;
+    }
+    .nav-toggle span:nth-child(1) { top: 0; }
+    .nav-toggle span:nth-child(2) { top: 9px; }
+    .nav-toggle span:nth-child(3) { top: 18px; }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-h); font-size: .75rem;
+      font-weight: 500; color: var(--accent);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: 20px;
+    }
+    .hero-tag::before {
+      content: ''; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 50%;
+      animation: tag-pulse 2s ease-in-out infinite;
+    }
+    @keyframes tag-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.7); }
+    }
+    .hero h1 {
+      font-family: var(--font-h); font-weight: 700;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      line-height: 1.1; letter-spacing: -.04em;
+      color: var(--ink); margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal; color: var(--accent);
+      position: relative;
+    }
+    .hero h1 em::after {
+      content: ''; position: absolute;
+      left: 0; bottom: 2px; width: 100%; height: 6px;
+      background: var(--accent-light); border-radius: 3px;
+      z-index: -1;
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--ink-2);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 32px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-h); font-size: .9rem;
+      font-weight: 500; padding: 14px 28px;
+      border-radius: 50px; transition: all .2s;
+      cursor: pointer; border: none;
+    }
+    .btn svg { width: 16px; height: 16px; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---- HERO MOCKUP ---- */
+    .hero-mockup {
+      position: relative;
+    }
+    .mockup-browser {
+      background: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(15,118,110,.08), 0 2px 8px rgba(0,0,0,.04);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .mockup-browser:hover {
+      transform: perspective(1200px) rotateY(0) rotateX(0);
+    }
+    .mockup-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px;
+      background: #f1f5f9; border-bottom: 1px solid var(--border);
+    }
+    .mockup-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .mockup-dot:nth-child(1) { background: #fca5a5; }
+    .mockup-dot:nth-child(2) { background: #fcd34d; }
+    .mockup-dot:nth-child(3) { background: #6ee7b7; }
+    .mockup-url {
+      flex: 1; margin-left: 8px;
+      background: #e2e8f0; border-radius: 4px;
+      padding: 4px 12px; font-size: .7rem;
+      color: var(--ink-3); font-family: var(--font-b);
+    }
+    .mockup-body {
+      padding: 24px;
+      min-height: 280px;
+      background: linear-gradient(135deg, #f0fdf9 0%, #f8fafb 100%);
+    }
+    .mockup-school-name {
+      font-family: var(--font-h); font-size: 1rem;
+      font-weight: 600; color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .mockup-nav-row {
+      display: flex; gap: 12px; margin-bottom: 18px;
+    }
+    .mockup-nav-pill {
+      font-size: .6rem; padding: 4px 10px;
+      background: var(--accent); color: #fff;
+      border-radius: 20px; font-family: var(--font-b);
+    }
+    .mockup-nav-pill.outline {
+      background: transparent; color: var(--ink-2);
+      border: 1px solid var(--border);
+    }
+    .mockup-card {
+      background: #fff; border-radius: 8px; padding: 14px;
+      border: 1px solid var(--border); margin-bottom: 10px;
+    }
+    .mockup-card-title {
+      font-family: var(--font-h); font-size: .7rem;
+      font-weight: 600; color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .mockup-card-text {
+      font-size: .6rem; color: var(--ink-3);
+      line-height: 1.4;
+    }
+    .mockup-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .mockup-badge {
+      display: inline-block; font-size: .55rem;
+      padding: 2px 8px; border-radius: 20px;
+      background: var(--accent-light); color: var(--accent);
+      font-weight: 500; margin-bottom: 8px;
+    }
+
+    /* ---- MARQUEE ---- */
+    .marquee-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0; overflow: hidden;
+      background: var(--bg-card);
+      position: relative; z-index: 1;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee-scroll 30s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: var(--font-h); font-size: .85rem;
+      font-weight: 400; color: var(--ink-2);
+      white-space: nowrap; padding: 0 32px;
+      letter-spacing: .01em;
+    }
+    .marquee-item::before {
+      content: ''; display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); margin-right: 16px;
+      vertical-align: middle; opacity: .5;
+    }
+    @keyframes marquee-scroll {
+      to { transform: translateX(-50%); }
+    }
+
+    /* ---- SECTIONS ---- */
+    .section {
+      padding: clamp(72px, 8vw, 120px) 0;
+      position: relative; z-index: 1;
+    }
+    .section-tag {
+      font-family: var(--font-h); font-size: .7rem;
+      font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: .14em;
+      margin-bottom: 12px;
+    }
+    .section-h {
+      font-family: var(--font-h); font-weight: 700;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.12; letter-spacing: -.035em;
+      color: var(--ink); margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--ink-2);
+      max-width: 560px; line-height: 1.7;
+      font-weight: 300;
+    }
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    /* ---- PROBLEM / WHY ---- */
+    .why-section { background: var(--bg-alt); }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    .why-list { list-style: none; }
+    .why-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .why-item:last-child { border-bottom: none; }
+    .why-icon {
+      width: 40px; min-width: 40px; height: 40px;
+      border-radius: 10px; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .why-icon svg { width: 20px; height: 20px; }
+    .why-text h3 {
+      font-family: var(--font-h); font-weight: 600;
+      font-size: .95rem; margin-bottom: 4px;
+      color: var(--ink); letter-spacing: -.01em;
+    }
+    .why-text p {
+      font-size: .88rem; color: var(--ink-2);
+      line-height: 1.6; font-weight: 300;
+    }
+
+    /* ---- FEATURES GRID ---- */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(15,118,110,.06);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; color: var(--accent);
+    }
+    .feature-icon svg { width: 24px; height: 24px; }
+    .feature-card h3 {
+      font-family: var(--font-h); font-weight: 600;
+      font-size: 1.05rem; color: var(--ink);
+      margin-bottom: 8px; letter-spacing: -.02em;
+    }
+    .feature-card p {
+      font-size: .88rem; color: var(--ink-2);
+      line-height: 1.65; font-weight: 300;
+    }
+
+    /* ---- HOW IT WORKS (HORIZONTAL) ---- */
+    .steps-section { background: var(--bg-dark); color: #fff; }
+    .steps-section .section-tag { color: var(--accent-light); }
+    .steps-section .section-h { color: #fff; }
+    .steps-section .section-sub { color: rgba(255,255,255,.6); }
+    .steps-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px; margin-top: 56px;
+    }
+    .step-card {
+      position: relative;
+      padding: 36px 28px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      transition: background .3s, border-color .3s;
+    }
+    .step-card:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(15,118,110,.4);
+    }
+    .step-num {
+      font-family: var(--font-h); font-size: 3rem;
+      font-weight: 700; color: rgba(15,118,110,.25);
+      line-height: 1; margin-bottom: 16px;
+      letter-spacing: -.04em;
+    }
+    .step-card h3 {
+      font-family: var(--font-h); font-weight: 600;
+      font-size: 1.1rem; margin-bottom: 10px;
+      letter-spacing: -.02em;
+    }
+    .step-card p {
+      font-size: .88rem; color: rgba(255,255,255,.55);
+      line-height: 1.65; font-weight: 300;
+    }
+    .step-arrow {
+      position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%); color: rgba(255,255,255,.15);
+    }
+
+    /* ---- INCLUDED (CHECKLIST) ---- */
+    .included-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .included-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: .92rem; color: var(--ink);
+      font-weight: 400; transition: border-color .2s;
+    }
+    .included-item:hover { border-color: var(--accent); }
+    .included-check {
+      width: 22px; min-width: 22px; height: 22px;
+      border-radius: 50%; background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+    }
+    .included-check svg { width: 12px; height: 12px; }
+
+    /* ---- PRICING (NO PRICES) ---- */
+    .pricing-section { background: var(--bg-alt); }
+    .pricing-card {
+      max-width: 640px; margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(15,118,110,.05);
+    }
+    .pricing-card h3 {
+      font-family: var(--font-h); font-weight: 700;
+      font-size: 1.6rem; color: var(--ink);
+      margin-bottom: 14px; letter-spacing: -.03em;
+    }
+    .pricing-card p {
+      font-size: 1rem; color: var(--ink-2);
+      line-height: 1.7; font-weight: 300;
+      margin-bottom: 32px; max-width: 420px;
+      margin-left: auto; margin-right: auto;
+    }
+    .pricing-perks {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-bottom: 36px;
+    }
+    .pricing-perk {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .82rem; color: var(--ink-2);
+      padding: 6px 14px; background: var(--bg-alt);
+      border-radius: 20px; font-weight: 400;
+    }
+    .pricing-perk svg { width: 14px; height: 14px; color: var(--accent); }
+
+    /* ---- FAQ ---- */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      padding: 22px 0; cursor: pointer;
+      background: none; border: none;
+      font-family: var(--font-h); font-size: .98rem;
+      font-weight: 500; color: var(--ink);
+      text-align: left; letter-spacing: -.01em;
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-q svg {
+      width: 20px; min-width: 20px; height: 20px;
+      stroke: var(--ink-3); stroke-width: 2;
+      fill: none; transition: transform .3s;
+    }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.16,1,.3,1), padding .3s;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+    .faq-a p {
+      font-size: .92rem; color: var(--ink-2);
+      line-height: 1.7; font-weight: 300;
+    }
+
+    /* ---- CTA ---- */
+    .cta-section {
+      background: var(--bg-dark); color: #fff;
+      text-align: center; padding: 100px 0;
+    }
+    .cta-section h2 {
+      font-family: var(--font-h); font-weight: 700;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.12; letter-spacing: -.035em;
+      margin-bottom: 16px;
+    }
+    .cta-section em {
+      font-style: normal; color: var(--accent-light);
+    }
+    .cta-section p {
+      font-size: 1.05rem; color: rgba(255,255,255,.55);
+      max-width: 480px; margin: 0 auto 36px;
+      font-weight: 300; line-height: 1.7;
+    }
+    .cta-section .btn-primary {
+      background: #fff; color: var(--bg-dark);
+      font-weight: 600;
+    }
+    .cta-section .btn-primary:hover {
+      background: var(--accent-light); color: var(--accent-hover);
+    }
+
+    /* ---- FOOTER ---- */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      font-size: .85rem; color: var(--ink-3);
+    }
+    .footer-logo {
+      font-family: var(--font-h); font-weight: 600;
+      font-size: 1rem; color: var(--ink);
+    }
+    .footer-logo span { color: var(--accent); font-weight: 400; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { color: var(--ink-3); transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ---- REVEAL ANIMATION ---- */
+    .rv {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .rv.visible { opacity: 1; transform: translateY(0); }
+    .stagger { transition-delay: calc(var(--i, 0) * .1s); }
+
+    /* ---- SCROLL PROGRESS ---- */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: var(--accent); z-index: 200;
+      width: 0; transition: width .05s linear;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-mockup { order: -1; max-width: 480px; }
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-row { grid-template-columns: 1fr; gap: 20px; }
+      .step-arrow { display: none; }
+      .included-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 50px; left: 0; right: 0;
+        background: rgba(248,250,251,.97);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 20px 24px; gap: 16px;
+      }
+      .hero { padding: 100px 0 60px; min-height: auto; }
+      .hero h1 { font-size: 2rem; }
+      .hero-sub { font-size: .95rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .mockup-browser { transform: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-card { padding: 36px 24px; }
+      .footer-inner { flex-direction: column; text-align: center; gap: 12px; }
+      .dot-grid { background-size: 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dot-grid"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="shell nav-inner">
+      <a class="nav-logo" href="/">Opract <span>Edu</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how" class="nav-link">How it works</a>
+        <a href="#included" class="nav-link">What's included</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+      <a class="nav-cta" href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener">Let's talk</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-text">
+          <div class="hero-tag rv">Now serving educational institutions</div>
+          <h1 class="rv">Your institution deserves a <em>real website.</em></h1>
+          <p class="hero-sub rv">We build and fully manage professional websites for schools, colleges, and coaching centers. You focus on education — we handle everything else.</p>
+          <div class="hero-actions rv">
+            <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary">
+              Get in touch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
+            </a>
+            <a href="#features" class="btn btn-outline">See features</a>
+          </div>
+        </div>
+        <div class="hero-mockup rv">
+          <div class="mockup-browser">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+              <div class="mockup-dot"></div>
+              <div class="mockup-url">yourschool.edu.in</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-school-name">Delhi Public Academy</div>
+              <div class="mockup-nav-row">
+                <span class="mockup-nav-pill">Home</span>
+                <span class="mockup-nav-pill outline">Admissions</span>
+                <span class="mockup-nav-pill outline">Gallery</span>
+                <span class="mockup-nav-pill outline">Faculty</span>
+              </div>
+              <div class="mockup-badge">New Notice</div>
+              <div class="mockup-card">
+                <div class="mockup-card-title">Admissions Open 2026-27</div>
+                <div class="mockup-card-text">Registration for Classes I-XII now open. Apply before 15 Dec.</div>
+              </div>
+              <div class="mockup-grid">
+                <div class="mockup-card">
+                  <div class="mockup-card-title">Annual Day</div>
+                  <div class="mockup-card-text">25 Nov, 10:00 AM</div>
+                </div>
+                <div class="mockup-card">
+                  <div class="mockup-card-title">Parent Meeting</div>
+                  <div class="mockup-card-text">28 Nov, 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span class="marquee-item">Schools</span>
+        <span class="marquee-item">Colleges</span>
+        <span class="marquee-item">Universities</span>
+        <span class="marquee-item">Coaching centers</span>
+        <span class="marquee-item">Tuition academies</span>
+        <span class="marquee-item">Play schools</span>
+        <span class="marquee-item">Training institutes</span>
+        <span class="marquee-item">EdTech companies</span>
+        <span class="marquee-item">Schools</span>
+        <span class="marquee-item">Colleges</span>
+        <span class="marquee-item">Universities</span>
+        <span class="marquee-item">Coaching centers</span>
+        <span class="marquee-item">Tuition academies</span>
+        <span class="marquee-item">Play schools</span>
+        <span class="marquee-item">Training institutes</span>
+        <span class="marquee-item">EdTech companies</span>
+      </div>
+    </div>
+
+    <!-- WHY -->
+    <section class="section why-section" id="why">
+      <div class="shell">
+        <div class="why-grid">
+          <div>
+            <div class="section-tag rv">The problem</div>
+            <h2 class="section-h rv">Most institution websites are <em>outdated, broken, or non-existent.</em></h2>
+            <p class="section-sub rv">Parents and students judge your institution by its website. A bad one — or no website at all — costs you admissions, trust, and credibility.</p>
+          </div>
+          <ul class="why-list">
+            <li class="why-item rv" style="--i:0">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+              </div>
+              <div class="why-text">
+                <h3>No online presence</h3>
+                <p>Parents search online first. If you don't show up, you don't exist to them.</p>
+              </div>
+            </li>
+            <li class="why-item rv stagger" style="--i:1">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+              </div>
+              <div class="why-text">
+                <h3>Outdated templates</h3>
+                <p>Generic builders produce sites that look the same and break on phones.</p>
+              </div>
+            </li>
+            <li class="why-item rv stagger" style="--i:2">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="why-text">
+                <h3>No one to manage it</h3>
+                <p>Teachers can't maintain websites. Agencies disappear after launch.</p>
+              </div>
+            </li>
+            <li class="why-item rv stagger" style="--i:3">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              </div>
+              <div class="why-text">
+                <h3>Expensive one-time builds</h3>
+                <p>Pay lakhs upfront, get abandoned within months. No updates, no support.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-header">
+          <div class="section-tag rv">What we build for you</div>
+          <h2 class="section-h rv">Everything your institution needs online.</h2>
+          <p class="section-sub rv">A professionally designed, fully managed website tailored to your institution — not a template.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card rv stagger" style="--i:0">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+            </div>
+            <h3>Notice board</h3>
+            <p>Post circulars, announcements, and updates. Parents and students see them instantly — no WhatsApp forwards needed.</p>
+          </div>
+          <div class="feature-card rv stagger" style="--i:1">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>
+            </div>
+            <h3>Events calendar</h3>
+            <p>Annual days, PTMs, exams, holidays — all in one clear, public calendar. Never miss communicating a date again.</p>
+          </div>
+          <div class="feature-card rv stagger" style="--i:2">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <h3>Photo gallery</h3>
+            <p>Showcase campus, events, classrooms, and achievements. High-quality galleries organized by category and year.</p>
+          </div>
+          <div class="feature-card rv stagger" style="--i:3">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Faculty directory</h3>
+            <p>Profiles for every teacher — name, subject, qualifications, photo. Build trust by showing the people behind the education.</p>
+          </div>
+          <div class="feature-card rv stagger" style="--i:4">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Admissions portal</h3>
+            <p>Online inquiry forms, fee structures, eligibility criteria, and downloadable prospectus. Capture every interested parent.</p>
+          </div>
+          <div class="feature-card rv stagger" style="--i:5">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <h3>Contact & enquiry</h3>
+            <p>Location map, phone, email, and a working enquiry form. Every message lands in your inbox — no missed leads.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section steps-section" id="how">
+      <div class="shell">
+        <div class="section-header">
+          <div class="section-tag rv">How it works</div>
+          <h2 class="section-h rv">Three steps. That's it.</h2>
+          <p class="section-sub rv">No technical knowledge needed. We handle everything from start to finish.</p>
+        </div>
+        <div class="steps-row">
+          <div class="step-card rv stagger" style="--i:0">
+            <div class="step-num">01</div>
+            <h3>You talk to us</h3>
+            <p>Tell us about your institution — what you need, your branding, your content. A 20-minute call is all it takes.</p>
+            <div class="step-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="step-card rv stagger" style="--i:1">
+            <div class="step-num">02</div>
+            <h3>We build everything</h3>
+            <p>We design and develop your entire website — pages, content layout, gallery, forms — custom-built for your institution.</p>
+            <div class="step-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+          <div class="step-card rv stagger" style="--i:2">
+            <div class="step-num">03</div>
+            <h3>We manage it forever</h3>
+            <p>New notice? Updated fees? Event photos? Just send us a WhatsApp — we update it within hours. Your permanent tech team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED -->
+    <section class="section" id="included">
+      <div class="shell">
+        <div class="section-header">
+          <div class="section-tag rv">Everything included</div>
+          <h2 class="section-h rv">You pay one fee. We handle the rest.</h2>
+          <p class="section-sub rv">No hidden costs. No add-ons. Every subscription includes everything your website needs to run smoothly.</p>
+        </div>
+        <div class="included-grid">
+          <div class="included-item rv stagger" style="--i:0">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Custom website design
+          </div>
+          <div class="included-item rv stagger" style="--i:1">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Domain name setup
+          </div>
+          <div class="included-item rv stagger" style="--i:2">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Fast, reliable hosting
+          </div>
+          <div class="included-item rv stagger" style="--i:3">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            SSL certificate (HTTPS)
+          </div>
+          <div class="included-item rv stagger" style="--i:4">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Unlimited content updates
+          </div>
+          <div class="included-item rv stagger" style="--i:5">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Mobile responsive design
+          </div>
+          <div class="included-item rv stagger" style="--i:6">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Daily backups
+          </div>
+          <div class="included-item rv stagger" style="--i:7">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Uptime monitoring
+          </div>
+          <div class="included-item rv stagger" style="--i:8">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            SEO optimized
+          </div>
+          <div class="included-item rv stagger" style="--i:9">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            Priority WhatsApp support
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section pricing-section" id="pricing">
+      <div class="shell">
+        <div class="section-header" style="text-align:center;">
+          <div class="section-tag rv" style="text-align:center;">Pricing</div>
+          <h2 class="section-h rv" style="margin-left:auto;margin-right:auto;">Simple pricing, no surprises.</h2>
+        </div>
+        <div class="pricing-card rv">
+          <h3>Let's talk about your institution.</h3>
+          <p>Every institution is different. We'll understand your needs and give you a clear, fixed monthly price — no hidden fees, no setup costs.</p>
+          <div class="pricing-perks">
+            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> No setup fees</span>
+            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> No contracts</span>
+            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Cancel anytime</span>
+            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Everything included</span>
+          </div>
+          <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Pricing+Enquiry&body=Hi+Opract%2C%0A%0AI%27d+like+to+know+the+pricing+for+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary">
+            Get a quote
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-header" style="text-align:center;">
+          <div class="section-tag rv" style="text-align:center;">FAQ</div>
+          <h2 class="section-h rv" style="margin-left:auto;margin-right:auto;">Questions answered.</h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item rv"><button class="faq-q">Do we need any technical knowledge? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>None at all. You tell us what to change over WhatsApp or email — we handle every technical detail. Think of us as your IT department for the website.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">How long does it take to build the website? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Most websites are live within 7-10 days after we receive your content and branding. Complex institutions with many departments may take up to 2 weeks.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">Can we update content ourselves? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>You don't need to. Just send us the update — new notice, event, photo, fee change — and we'll publish it within hours. Unlimited updates are included in every plan.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">What if we already have a website? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>We'll migrate your existing content and build a fresh, modern website. If you have an existing domain, we'll set it up to point to the new site seamlessly.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">What happens if we cancel? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>No lock-in. Cancel at the end of any billing period. Your site stays live until the period ends. We can also export your content if you want to move elsewhere.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">Do you provide the domain name? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Yes. We'll set up a professional domain for your institution (e.g., yourschool.edu.in or yourschool.com). Domain registration and renewal are included.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="shell">
+        <h2 class="rv">Your institution deserves<br><em>a digital presence.</em></h2>
+        <p class="rv">Parents are searching. Students are comparing. Make sure your institution stands out — professionally, online.</p>
+        <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary rv">
+          Let's talk
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span class="footer-logo">Opract <span>Edu</span></span>
+      <div class="footer-links">
+        <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com" target="_blank" rel="noopener">Contact</a>
+        <a href="https://www.linkedin.com/company/opract/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="https://opract.com" target="_blank" rel="noopener">Opract</a>
+        <span>&copy; 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      /* NAV SCROLL */
+      var nav = document.getElementById('nav');
+      var progress = document.getElementById('scrollProgress');
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (h > 0) progress.style.width = (window.scrollY / h * 100) + '%';
+      }, { passive: true });
+
+      /* NAV TOGGLE */
+      var toggle = document.getElementById('navToggle');
+      var links = document.getElementById('navLinks');
+      toggle.addEventListener('click', function () {
+        links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', links.classList.contains('open'));
+      });
+      links.querySelectorAll('.nav-link').forEach(function (a) {
+        a.addEventListener('click', function () { links.classList.remove('open'); });
+      });
+
+      /* REVEAL ON SCROLL */
+      var rvEls = document.querySelectorAll('.rv');
+      var rvObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            rvObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+      rvEls.forEach(function (el) { rvObs.observe(el); });
+
+      /* FAQ ACCORDION */
+      document.querySelectorAll('.faq-q').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var item = btn.parentElement;
+          var wasOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item.open').forEach(function (i) { i.classList.remove('open'); });
+          if (!wasOpen) item.classList.add('open');
+        });
+      });
+
+      /* SMOOTH SCROLL FOR ANCHOR LINKS */
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
