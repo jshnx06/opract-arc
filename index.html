@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Opract Edu | Professional Websites for Educational Institutions</title>
-  <meta name="description" content="Opract Edu builds and manages professional websites for schools, colleges, universities, and coaching centers. Notices, events, gallery, admissions — everything your institution needs online.">
+  <title>Opract Edu | Technology for Educational Institutions</title>
+  <meta name="description" content="Opract Edu provides technology solutions for schools, colleges, universities, and coaching centers. Notices, events, gallery, admissions — everything your institution needs, managed for you.">
   <link rel="canonical" href="https://edu.opract.com/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://edu.opract.com/">
-  <meta property="og:title" content="Opract Edu | Professional Websites for Educational Institutions">
-  <meta property="og:description" content="We build and fully manage websites for schools, colleges, and coaching centers. You focus on education — we handle the tech.">
+  <meta property="og:title" content="Opract Edu | Technology for Educational Institutions">
+  <meta property="og:description" content="Technology solutions for schools, colleges, and coaching centers. You focus on education — we handle the tech.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f8fafb">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,12 +55,11 @@
     a { color: inherit; text-decoration: none; }
     .shell { max-width: var(--shell); margin: 0 auto; padding: 0 24px; }
 
-    /* ---- DOT GRID BACKGROUND ---- */
-    .dot-grid {
+    /* ---- MAGNETIC FIELD BACKGROUND ---- */
+    #fieldCanvas {
       position: fixed; inset: 0; z-index: 0;
       pointer-events: none;
-      background-image: radial-gradient(circle, rgba(15,118,110,.07) 1px, transparent 1px);
-      background-size: 32px 32px;
+      width: 100%; height: 100%;
     }
 
     /* ---- NAV ---- */
@@ -117,52 +116,72 @@
     /* ---- HERO ---- */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
+      justify-content: center;
       padding: 120px 0 80px;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; z-index: 1;
     }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center;
+    .hero-center {
+      text-align: center;
       position: relative; z-index: 1;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--font-h); font-size: .75rem;
-      font-weight: 500; color: var(--accent);
-      text-transform: uppercase; letter-spacing: .1em;
-      margin-bottom: 20px;
-    }
-    .hero-tag::before {
-      content: ''; width: 8px; height: 8px;
-      background: var(--accent); border-radius: 50%;
-      animation: tag-pulse 2s ease-in-out infinite;
-    }
-    @keyframes tag-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .5; transform: scale(.7); }
     }
     .hero h1 {
       font-family: var(--font-h); font-weight: 700;
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      line-height: 1.1; letter-spacing: -.04em;
-      color: var(--ink); margin-bottom: 20px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.15; letter-spacing: -.04em;
+      color: var(--ink);
+    }
+    .hero h1 .hw {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%) rotateX(-80deg);
+      transform-origin: center top;
+      animation: hw-in .7s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes hw-in {
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    .hero h1.glow {
+      background: linear-gradient(
+        90deg,
+        var(--ink) 0%,
+        var(--accent) 25%,
+        #2dd4bf 50%,
+        var(--accent) 75%,
+        var(--ink) 100%
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: color-flow 6s ease-in-out infinite;
+    }
+    .hero h1.glow .hw {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    @keyframes color-flow {
+      0%, 100% { background-position: 100% 0; }
+      50% { background-position: 0% 0; }
     }
     .hero h1 em {
       font-style: normal; color: var(--accent);
       position: relative;
     }
+    .hero h1.glow em {
+      -webkit-text-fill-color: transparent;
+    }
     .hero h1 em::after {
       content: ''; position: absolute;
-      left: 0; bottom: 2px; width: 100%; height: 6px;
+      left: 0; bottom: 2px; width: 0; height: 6px;
       background: var(--accent-light); border-radius: 3px;
       z-index: -1;
+      animation: underline-draw .6s cubic-bezier(.16,1,.3,1) forwards;
+      animation-delay: 1.1s;
     }
-    .hero-sub {
-      font-size: 1.1rem; color: var(--ink-2);
-      line-height: 1.7; max-width: 480px;
-      margin-bottom: 32px; font-weight: 300;
+    @keyframes underline-draw {
+      to { width: 100%; }
     }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--font-h); font-size: .9rem;
@@ -180,84 +199,6 @@
       border: 1.5px solid var(--border);
     }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* ---- HERO MOCKUP ---- */
-    .hero-mockup {
-      position: relative;
-    }
-    .mockup-browser {
-      background: var(--bg-card);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px rgba(15,118,110,.08), 0 2px 8px rgba(0,0,0,.04);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
-      transition: transform .6s cubic-bezier(.16,1,.3,1);
-    }
-    .mockup-browser:hover {
-      transform: perspective(1200px) rotateY(0) rotateX(0);
-    }
-    .mockup-bar {
-      display: flex; align-items: center; gap: 6px;
-      padding: 10px 14px;
-      background: #f1f5f9; border-bottom: 1px solid var(--border);
-    }
-    .mockup-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-    }
-    .mockup-dot:nth-child(1) { background: #fca5a5; }
-    .mockup-dot:nth-child(2) { background: #fcd34d; }
-    .mockup-dot:nth-child(3) { background: #6ee7b7; }
-    .mockup-url {
-      flex: 1; margin-left: 8px;
-      background: #e2e8f0; border-radius: 4px;
-      padding: 4px 12px; font-size: .7rem;
-      color: var(--ink-3); font-family: var(--font-b);
-    }
-    .mockup-body {
-      padding: 24px;
-      min-height: 280px;
-      background: linear-gradient(135deg, #f0fdf9 0%, #f8fafb 100%);
-    }
-    .mockup-school-name {
-      font-family: var(--font-h); font-size: 1rem;
-      font-weight: 600; color: var(--ink);
-      margin-bottom: 12px;
-    }
-    .mockup-nav-row {
-      display: flex; gap: 12px; margin-bottom: 18px;
-    }
-    .mockup-nav-pill {
-      font-size: .6rem; padding: 4px 10px;
-      background: var(--accent); color: #fff;
-      border-radius: 20px; font-family: var(--font-b);
-    }
-    .mockup-nav-pill.outline {
-      background: transparent; color: var(--ink-2);
-      border: 1px solid var(--border);
-    }
-    .mockup-card {
-      background: #fff; border-radius: 8px; padding: 14px;
-      border: 1px solid var(--border); margin-bottom: 10px;
-    }
-    .mockup-card-title {
-      font-family: var(--font-h); font-size: .7rem;
-      font-weight: 600; color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .mockup-card-text {
-      font-size: .6rem; color: var(--ink-3);
-      line-height: 1.4;
-    }
-    .mockup-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    .mockup-badge {
-      display: inline-block; font-size: .55rem;
-      padding: 2px 8px; border-radius: 20px;
-      background: var(--accent-light); color: var(--accent);
-      font-weight: 500; margin-bottom: 8px;
-    }
 
     /* ---- MARQUEE ---- */
     .marquee-strip {
@@ -314,175 +255,345 @@
       margin-bottom: 56px;
     }
 
-    /* ---- PROBLEM / WHY ---- */
-    .why-section { background: var(--bg-alt); }
-    .why-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 56px; align-items: center;
+    /* ---- FEATURES BENTO ---- */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 24px;
     }
-    .why-list { list-style: none; }
-    .why-item {
-      display: flex; gap: 16px; align-items: flex-start;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
+    .blob {
+      padding: 36px 30px;
+      position: relative; overflow: hidden;
+      transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease;
+      animation: blob-float 6s ease-in-out infinite;
     }
-    .why-item:last-child { border-bottom: none; }
-    .why-icon {
-      width: 40px; min-width: 40px; height: 40px;
-      border-radius: 10px; background: var(--accent-light);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent);
+    .blob:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(15,118,110,.1);
     }
-    .why-icon svg { width: 20px; height: 20px; }
-    .why-text h3 {
-      font-family: var(--font-h); font-weight: 600;
-      font-size: .95rem; margin-bottom: 4px;
-      color: var(--ink); letter-spacing: -.01em;
+    .blob.wide { grid-column: span 2; }
+
+    .blob:nth-child(1) {
+      background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+      border-radius: 60% 40% 50% 45% / 45% 55% 40% 50%;
+      animation-delay: 0s;
     }
-    .why-text p {
-      font-size: .88rem; color: var(--ink-2);
-      line-height: 1.6; font-weight: 300;
+    .blob:nth-child(2) {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: 45% 55% 40% 60% / 50% 40% 55% 45%;
+      animation-delay: -1s;
+    }
+    .blob:nth-child(3) {
+      background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+      border-radius: 50% 45% 55% 40% / 40% 50% 45% 55%;
+      animation-delay: -2s;
+    }
+    .blob:nth-child(4) {
+      background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+      border-radius: 40% 55% 45% 50% / 55% 45% 50% 40%;
+      animation-delay: -3s;
+    }
+    .blob:nth-child(5) {
+      background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+      border-radius: 55% 40% 50% 45% / 45% 50% 40% 55%;
+      animation-delay: -4s;
+    }
+    .blob:nth-child(6) {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-radius: 45% 50% 40% 55% / 50% 45% 55% 40%;
+      animation-delay: -5s;
     }
 
-    /* ---- FEATURES GRID ---- */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    @keyframes blob-float {
+      0%, 100% { transform: translateY(0); border-radius: inherit; }
+      33% { transform: translateY(-6px); }
+      66% { transform: translateY(3px); }
     }
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: border-color .3s, box-shadow .3s, transform .3s;
-      position: relative; overflow: hidden;
-    }
-    .feature-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; background: var(--accent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .4s cubic-bezier(.16,1,.3,1);
-    }
-    .feature-card:hover::before { transform: scaleX(1); }
-    .feature-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 32px rgba(15,118,110,.06);
-      transform: translateY(-3px);
-    }
-    .feature-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: var(--accent-soft);
+
+    .blob-icon {
+      width: 52px; height: 52px;
+      border-radius: 50% 40% 55% 45%;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px; color: var(--accent);
+      margin-bottom: 18px;
+      animation: icon-morph 8s ease-in-out infinite;
     }
-    .feature-icon svg { width: 24px; height: 24px; }
-    .feature-card h3 {
+    @keyframes icon-morph {
+      0%, 100% { border-radius: 50% 40% 55% 45%; }
+      25% { border-radius: 40% 55% 45% 50%; }
+      50% { border-radius: 55% 45% 40% 50%; }
+      75% { border-radius: 45% 50% 50% 40%; }
+    }
+    .blob:nth-child(1) .blob-icon { background: rgba(15,118,110,.12); color: #0f766e; }
+    .blob:nth-child(2) .blob-icon { background: rgba(37,99,235,.12); color: #2563eb; }
+    .blob:nth-child(3) .blob-icon { background: rgba(202,138,4,.12); color: #a16207; }
+    .blob:nth-child(4) .blob-icon { background: rgba(190,24,93,.12); color: #be185d; }
+    .blob:nth-child(5) .blob-icon { background: rgba(109,40,217,.12); color: #6d28d9; }
+    .blob:nth-child(6) .blob-icon { background: rgba(22,163,74,.12); color: #16a34a; }
+    .blob-icon svg { width: 24px; height: 24px; }
+
+    .blob h3 {
       font-family: var(--font-h); font-weight: 600;
       font-size: 1.05rem; color: var(--ink);
       margin-bottom: 8px; letter-spacing: -.02em;
     }
-    .feature-card p {
+    .blob p {
       font-size: .88rem; color: var(--ink-2);
       line-height: 1.65; font-weight: 300;
     }
+    .blob.wide p { max-width: 380px; }
 
-    /* ---- HOW IT WORKS (HORIZONTAL) ---- */
-    .steps-section { background: var(--bg-dark); color: #fff; }
+    /* ---- HOW IT WORKS (CHAT) ---- */
+    .steps-section { background: var(--bg-dark); color: #fff; position: relative; z-index: 1; }
     .steps-section .section-tag { color: var(--accent-light); }
     .steps-section .section-h { color: #fff; }
     .steps-section .section-sub { color: rgba(255,255,255,.6); }
-    .steps-row {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 32px; margin-top: 56px;
+    .chat-wrap {
+      max-width: 520px; margin: 56px auto 0;
+      display: flex; flex-direction: column; gap: 10px;
     }
-    .step-card {
-      position: relative;
-      padding: 36px 28px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      transition: background .3s, border-color .3s;
+    .chat-step-label {
+      text-align: center; font-family: var(--font-h);
+      font-size: .65rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: rgba(255,255,255,.25);
+      margin-top: 18px; margin-bottom: 2px;
     }
-    .step-card:hover {
+    .chat-step-label:first-child { margin-top: 0; }
+    .chat-msg {
+      max-width: 82%; padding: 12px 18px;
+      font-size: .9rem; line-height: 1.55;
+      font-weight: 300;
+    }
+    .chat-you {
+      background: var(--accent); color: #fff;
+      align-self: flex-end;
+      border-radius: 20px 20px 6px 20px;
+    }
+    .chat-us {
       background: rgba(255,255,255,.07);
-      border-color: rgba(15,118,110,.4);
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.8);
+      align-self: flex-start;
+      border-radius: 20px 20px 20px 6px;
     }
-    .step-num {
-      font-family: var(--font-h); font-size: 3rem;
-      font-weight: 700; color: rgba(15,118,110,.25);
-      line-height: 1; margin-bottom: 16px;
-      letter-spacing: -.04em;
+    .chat-done {
+      background: linear-gradient(135deg, var(--accent), #2dd4bf);
+      color: #fff; font-weight: 400;
+      align-self: flex-start;
+      border-radius: 20px 20px 20px 6px;
     }
-    .step-card h3 {
-      font-family: var(--font-h); font-weight: 600;
-      font-size: 1.1rem; margin-bottom: 10px;
-      letter-spacing: -.02em;
+    .chat-sender {
+      font-size: .7rem; font-weight: 500;
+      color: rgba(255,255,255,.3);
+      margin-bottom: 4px; margin-top: 10px;
     }
-    .step-card p {
-      font-size: .88rem; color: rgba(255,255,255,.55);
-      line-height: 1.65; font-weight: 300;
+    .chat-sender.right { text-align: right; }
+    .chat-typing {
+      display: inline-flex; gap: 5px;
+      padding: 14px 20px; align-self: flex-start;
+      background: rgba(255,255,255,.05);
+      border-radius: 20px 20px 20px 6px;
     }
-    .step-arrow {
-      position: absolute; right: -20px; top: 50%;
-      transform: translateY(-50%); color: rgba(255,255,255,.15);
+    .chat-typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,.25);
+      animation: typing-bounce 1.4s ease-in-out infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: .2s; }
+    .chat-typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+    @keyframes chat-pop {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ---- INCLUDED (CHECKLIST) ---- */
-    .included-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .included-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 16px 20px;
+    /* ---- INCLUDED (BOARDING PASS) ---- */
+    .boarding-pass {
+      position: relative;
+      display: flex;
+      max-width: 740px;
+      margin: 48px auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,.07);
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: .92rem; color: var(--ink);
-      font-weight: 400; transition: border-color .2s;
     }
-    .included-item:hover { border-color: var(--accent); }
-    .included-check {
-      width: 22px; min-width: 22px; height: 22px;
-      border-radius: 50%; background: var(--accent-light);
-      display: flex; align-items: center; justify-content: center;
+    .boarding-pass.rv {
+      opacity: 0;
+      transform: translateY(30px) rotate(-1deg);
+    }
+    .boarding-pass.rv.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .boarding-pass.rv.visible::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -30%; width: 30%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      z-index: 4;
+      animation: bp-glint 1s .6s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes bp-glint {
+      0% { left: -30%; }
+      100% { left: 130%; }
+    }
+    .bp-main {
+      flex: 1;
+      padding: 36px 32px 32px;
+    }
+    .bp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bp-label {
+      font-family: var(--font-h);
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 600;
+    }
+    .bp-logo {
+      font-family: var(--font-h);
+      font-size: .85rem;
       color: var(--accent);
+      font-weight: 600;
     }
-    .included-check svg { width: 12px; height: 12px; }
-
-    /* ---- PRICING (NO PRICES) ---- */
-    .pricing-section { background: var(--bg-alt); }
-    .pricing-card {
-      max-width: 640px; margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 56px 48px;
+    .bp-route {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .bp-field-label {
+      display: block;
+      font-size: .65rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--ink-3);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .bp-field-value {
+      display: block;
+      font-family: var(--font-h);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .bp-arrow {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 2px;
+      animation: bp-arrow-pulse 2s ease-in-out infinite;
+    }
+    @keyframes bp-arrow-pulse {
+      0%, 100% { transform: translateX(0); opacity: .7; }
+      50% { transform: translateX(6px); opacity: 1; }
+    }
+    .bp-meta {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .bp-items-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .bp-item {
+      font-size: .82rem;
+      color: var(--ink-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bp-item-check {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .bp-divider {
+      width: 0;
+      position: relative;
+      border-left: 2px dashed var(--border);
+    }
+    .bp-notch {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: var(--bg);
+      border-radius: 50%;
+      left: -15px;
+      z-index: 3;
+    }
+    .bp-notch-top { top: -14px; }
+    .bp-notch-bot { bottom: -14px; }
+    .bp-stub {
+      width: 180px;
+      min-width: 180px;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      box-shadow: 0 12px 40px rgba(15,118,110,.05);
+      background: var(--accent);
+      color: #fff;
+      gap: 12px;
     }
-    .pricing-card h3 {
-      font-family: var(--font-h); font-weight: 700;
-      font-size: 1.6rem; color: var(--ink);
-      margin-bottom: 14px; letter-spacing: -.03em;
+    .bp-stub-code {
+      font-family: var(--font-h);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      line-height: 1;
     }
-    .pricing-card p {
-      font-size: 1rem; color: var(--ink-2);
-      line-height: 1.7; font-weight: 300;
-      margin-bottom: 32px; max-width: 420px;
-      margin-left: auto; margin-right: auto;
+    .bp-stub-plan {
+      font-size: .75rem;
+      font-weight: 500;
+      opacity: .85;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
-    .pricing-perks {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 10px; margin-bottom: 36px;
+    .bp-stub-line {
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,.3);
     }
-    .pricing-perk {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: .82rem; color: var(--ink-2);
-      padding: 6px 14px; background: var(--bg-alt);
-      border-radius: 20px; font-weight: 400;
+    .bp-stub-note {
+      font-size: .72rem;
+      opacity: .7;
+      line-height: 1.5;
     }
-    .pricing-perk svg { width: 14px; height: 14px; color: var(--accent); }
+    .bp-barcode {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 28px;
+      opacity: .35;
+      margin-top: 8px;
+    }
+    .bp-bar {
+      width: 2px;
+      background: #fff;
+      border-radius: 1px;
+    }
 
     /* ---- FAQ ---- */
     .faq-list { max-width: 720px; margin: 0 auto; }
@@ -520,6 +631,7 @@
     .cta-section {
       background: var(--bg-dark); color: #fff;
       text-align: center; padding: 100px 0;
+      position: relative; z-index: 1;
     }
     .cta-section h2 {
       font-family: var(--font-h); font-weight: 700;
@@ -580,13 +692,12 @@
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-mockup { order: -1; max-width: 480px; }
-      .why-grid { grid-template-columns: 1fr; gap: 40px; }
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-row { grid-template-columns: 1fr; gap: 20px; }
-      .step-arrow { display: none; }
-      .included-grid { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .blob.wide { grid-column: span 2; }
+      .chat-wrap { margin-top: 40px; }
+      .chat-msg { max-width: 90%; }
+      .bp-items-grid { grid-template-columns: 1fr; }
+      .bp-main { padding: 28px 24px 24px; }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
@@ -601,20 +712,34 @@
       }
       .hero { padding: 100px 0 60px; min-height: auto; }
       .hero h1 { font-size: 2rem; }
-      .hero-sub { font-size: .95rem; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; justify-content: center; }
-      .mockup-browser { transform: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .pricing-card { padding: 36px 24px; }
+      .bento { grid-template-columns: 1fr; }
+      .blob.wide { grid-column: span 1; }
+      .boarding-pass { flex-direction: column; }
+      .bp-divider {
+        width: auto; height: 0;
+        border-left: none; border-top: 2px dashed var(--border);
+      }
+      .bp-notch { top: -15px; }
+      .bp-notch-top { left: -14px; }
+      .bp-notch-bot { left: auto; right: -14px; bottom: auto; }
+      .bp-stub {
+        width: 100%; min-width: unset;
+        padding: 28px 24px;
+        flex-direction: row; flex-wrap: wrap;
+        justify-content: center; gap: 8px 20px;
+      }
+      .bp-stub-code { font-size: 1.6rem; }
+      .bp-stub-line { display: none; }
+      .bp-barcode { margin-top: 0; }
+      .bp-route { flex-wrap: wrap; gap: 12px; }
       .footer-inner { flex-direction: column; text-align: center; gap: 12px; }
-      .dot-grid { background-size: 24px 24px; }
+      #fieldCanvas { /* responsive — no change needed */ }
     }
   </style>
 </head>
 <body>
 
-  <div class="dot-grid"></div>
+  <canvas id="fieldCanvas"></canvas>
   <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- NAV -->
@@ -627,7 +752,7 @@
         <a href="#included" class="nav-link">What's included</a>
         <a href="#faq" class="nav-link">FAQ</a>
       </nav>
-      <a class="nav-cta" href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener">Let's talk</a>
+      <a class="nav-cta" href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+Opract+Edu+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener">Let's talk</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -638,53 +763,14 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="shell hero-grid">
-        <div class="hero-text">
-          <div class="hero-tag rv">Now serving educational institutions</div>
-          <h1 class="rv">Your institution deserves a <em>real website.</em></h1>
-          <p class="hero-sub rv">We build and fully manage professional websites for schools, colleges, and coaching centers. You focus on education — we handle everything else.</p>
-          <div class="hero-actions rv">
-            <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary">
-              Get in touch
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
-            </a>
-            <a href="#features" class="btn btn-outline">See features</a>
-          </div>
-        </div>
-        <div class="hero-mockup rv">
-          <div class="mockup-browser">
-            <div class="mockup-bar">
-              <div class="mockup-dot"></div>
-              <div class="mockup-dot"></div>
-              <div class="mockup-dot"></div>
-              <div class="mockup-url">yourschool.edu.in</div>
-            </div>
-            <div class="mockup-body">
-              <div class="mockup-school-name">Delhi Public Academy</div>
-              <div class="mockup-nav-row">
-                <span class="mockup-nav-pill">Home</span>
-                <span class="mockup-nav-pill outline">Admissions</span>
-                <span class="mockup-nav-pill outline">Gallery</span>
-                <span class="mockup-nav-pill outline">Faculty</span>
-              </div>
-              <div class="mockup-badge">New Notice</div>
-              <div class="mockup-card">
-                <div class="mockup-card-title">Admissions Open 2026-27</div>
-                <div class="mockup-card-text">Registration for Classes I-XII now open. Apply before 15 Dec.</div>
-              </div>
-              <div class="mockup-grid">
-                <div class="mockup-card">
-                  <div class="mockup-card-title">Annual Day</div>
-                  <div class="mockup-card-text">25 Nov, 10:00 AM</div>
-                </div>
-                <div class="mockup-card">
-                  <div class="mockup-card-title">Parent Meeting</div>
-                  <div class="mockup-card-text">28 Nov, 2:00 PM</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="shell hero-center">
+        <h1>
+          <span class="hw" style="animation-delay:.2s">Technology</span>
+          <span class="hw" style="animation-delay:.35s">that</span>
+          <span class="hw" style="animation-delay:.5s">powers</span>
+          <span class="hw" style="animation-delay:.65s">your</span>
+          <em><span class="hw" style="animation-delay:.8s">institution.</span></em>
+        </h1>
       </div>
     </section>
 
@@ -710,107 +796,56 @@
       </div>
     </div>
 
-    <!-- WHY -->
-    <section class="section why-section" id="why">
-      <div class="shell">
-        <div class="why-grid">
-          <div>
-            <div class="section-tag rv">The problem</div>
-            <h2 class="section-h rv">Most institution websites are <em>outdated, broken, or non-existent.</em></h2>
-            <p class="section-sub rv">Parents and students judge your institution by its website. A bad one — or no website at all — costs you admissions, trust, and credibility.</p>
-          </div>
-          <ul class="why-list">
-            <li class="why-item rv" style="--i:0">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
-              </div>
-              <div class="why-text">
-                <h3>No online presence</h3>
-                <p>Parents search online first. If you don't show up, you don't exist to them.</p>
-              </div>
-            </li>
-            <li class="why-item rv stagger" style="--i:1">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-              </div>
-              <div class="why-text">
-                <h3>Outdated templates</h3>
-                <p>Generic builders produce sites that look the same and break on phones.</p>
-              </div>
-            </li>
-            <li class="why-item rv stagger" style="--i:2">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="why-text">
-                <h3>No one to manage it</h3>
-                <p>Teachers can't maintain websites. Agencies disappear after launch.</p>
-              </div>
-            </li>
-            <li class="why-item rv stagger" style="--i:3">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-              </div>
-              <div class="why-text">
-                <h3>Expensive one-time builds</h3>
-                <p>Pay lakhs upfront, get abandoned within months. No updates, no support.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- FEATURES -->
     <section class="section" id="features">
       <div class="shell">
         <div class="section-header">
-          <div class="section-tag rv">What we build for you</div>
-          <h2 class="section-h rv">Everything your institution needs online.</h2>
-          <p class="section-sub rv">A professionally designed, fully managed website tailored to your institution — not a template.</p>
+          <div class="section-tag rv">What you get</div>
+          <h2 class="section-h rv">Everything your institution needs. Managed for you.</h2>
+          <p class="section-sub rv">A complete technology solution tailored to your institution — not a template.</p>
         </div>
-        <div class="features-grid">
-          <div class="feature-card rv stagger" style="--i:0">
-            <div class="feature-icon">
+        <div class="bento">
+          <div class="blob wide rv">
+            <div class="blob-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
             </div>
             <h3>Notice board</h3>
             <p>Post circulars, announcements, and updates. Parents and students see them instantly — no WhatsApp forwards needed.</p>
           </div>
-          <div class="feature-card rv stagger" style="--i:1">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>
+          <div class="blob rv">
+            <div class="blob-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
             </div>
             <h3>Events calendar</h3>
-            <p>Annual days, PTMs, exams, holidays — all in one clear, public calendar. Never miss communicating a date again.</p>
+            <p>Annual days, PTMs, exams, holidays — all in one clear, public calendar.</p>
           </div>
-          <div class="feature-card rv stagger" style="--i:2">
-            <div class="feature-icon">
+          <div class="blob rv">
+            <div class="blob-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             </div>
             <h3>Photo gallery</h3>
-            <p>Showcase campus, events, classrooms, and achievements. High-quality galleries organized by category and year.</p>
+            <p>Showcase campus, events, classrooms, and achievements.</p>
           </div>
-          <div class="feature-card rv stagger" style="--i:3">
-            <div class="feature-icon">
+          <div class="blob rv">
+            <div class="blob-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
             <h3>Faculty directory</h3>
-            <p>Profiles for every teacher — name, subject, qualifications, photo. Build trust by showing the people behind the education.</p>
+            <p>Profiles for every teacher — name, subject, qualifications, photo.</p>
           </div>
-          <div class="feature-card rv stagger" style="--i:4">
-            <div class="feature-icon">
+          <div class="blob wide rv">
+            <div class="blob-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
             <h3>Admissions portal</h3>
             <p>Online inquiry forms, fee structures, eligibility criteria, and downloadable prospectus. Capture every interested parent.</p>
           </div>
-          <div class="feature-card rv stagger" style="--i:5">
-            <div class="feature-icon">
+          <div class="blob rv">
+            <div class="blob-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             </div>
             <h3>Contact & enquiry</h3>
-            <p>Location map, phone, email, and a working enquiry form. Every message lands in your inbox — no missed leads.</p>
+            <p>Location map, phone, email, and a working enquiry form. No missed leads.</p>
           </div>
         </div>
       </div>
@@ -824,28 +859,26 @@
           <h2 class="section-h rv">Three steps. That's it.</h2>
           <p class="section-sub rv">No technical knowledge needed. We handle everything from start to finish.</p>
         </div>
-        <div class="steps-row">
-          <div class="step-card rv stagger" style="--i:0">
-            <div class="step-num">01</div>
-            <h3>You talk to us</h3>
-            <p>Tell us about your institution — what you need, your branding, your content. A 20-minute call is all it takes.</p>
-            <div class="step-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-            </div>
-          </div>
-          <div class="step-card rv stagger" style="--i:1">
-            <div class="step-num">02</div>
-            <h3>We build everything</h3>
-            <p>We design and develop your entire website — pages, content layout, gallery, forms — custom-built for your institution.</p>
-            <div class="step-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-            </div>
-          </div>
-          <div class="step-card rv stagger" style="--i:2">
-            <div class="step-num">03</div>
-            <h3>We manage it forever</h3>
-            <p>New notice? Updated fees? Event photos? Just send us a WhatsApp — we update it within hours. Your permanent tech team.</p>
-          </div>
+        <div class="chat-wrap">
+          <div class="chat-step-label rv">Step 1 — You talk to us</div>
+          <div class="chat-sender right rv">You</div>
+          <div class="chat-msg chat-you rv" style="animation-delay:.2s">Hi, we're interested in Opract Edu for our school. We have no idea where to start.</div>
+          <div class="chat-sender rv">Opract</div>
+          <div class="chat-msg chat-us rv" style="animation-delay:.4s">No worries! Just tell us your school name, logo, and what you need. A 20-minute call is all it takes.</div>
+
+          <div class="chat-step-label rv">Step 2 — We set everything up</div>
+          <div class="chat-sender rv">Opract</div>
+          <div class="chat-msg chat-us rv" style="animation-delay:.6s">We're setting up your technology now — custom design, all your content, works on every device. Here's a preview.</div>
+          <div class="chat-sender right rv">You</div>
+          <div class="chat-msg chat-you rv" style="animation-delay:.8s">This looks amazing! Can we adjust the gallery section?</div>
+          <div class="chat-sender rv">Opract</div>
+          <div class="chat-msg chat-us rv" style="animation-delay:1s">Done. Updated and live. Take a look.</div>
+
+          <div class="chat-step-label rv">Step 3 — We manage it forever</div>
+          <div class="chat-sender right rv">You</div>
+          <div class="chat-msg chat-you rv" style="animation-delay:1.2s">We have a new notice and some event photos to post.</div>
+          <div class="chat-msg chat-done rv" style="animation-delay:1.4s">Done! Everything is always managed. We're your permanent tech team. Just send a WhatsApp anytime.</div>
+          <div class="chat-typing rv" style="animation-delay:1.6s"><span></span><span></span><span></span></div>
         </div>
       </div>
     </section>
@@ -855,74 +888,85 @@
       <div class="shell">
         <div class="section-header">
           <div class="section-tag rv">Everything included</div>
-          <h2 class="section-h rv">You pay one fee. We handle the rest.</h2>
-          <p class="section-sub rv">No hidden costs. No add-ons. Every subscription includes everything your website needs to run smoothly.</p>
+          <h2 class="section-h rv">Everything is included. Always.</h2>
+          <p class="section-sub rv">No add-ons. No extras. Every feature your institution needs, fully managed by us.</p>
         </div>
-        <div class="included-grid">
-          <div class="included-item rv stagger" style="--i:0">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Custom website design
+        <div class="boarding-pass rv">
+          <div class="bp-main">
+            <div class="bp-header">
+              <span class="bp-label">Boarding Pass</span>
+              <span class="bp-logo">Opract Edu</span>
+            </div>
+            <div class="bp-route">
+              <div>
+                <span class="bp-field-label">From</span>
+                <span class="bp-field-value">No tech</span>
+              </div>
+              <div class="bp-arrow">&rarr;</div>
+              <div>
+                <span class="bp-field-label">To</span>
+                <span class="bp-field-value">Fully digital</span>
+              </div>
+            </div>
+            <div class="bp-meta">
+              <div>
+                <span class="bp-field-label">Class</span>
+                <span class="bp-field-value">All-Inclusive</span>
+              </div>
+              <div>
+                <span class="bp-field-label">Extras needed</span>
+                <span class="bp-field-value">None</span>
+              </div>
+              <div>
+                <span class="bp-field-label">Seat</span>
+                <span class="bp-field-value">Every feature</span>
+              </div>
+            </div>
+            <div class="bp-items-grid">
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Custom design</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Complete setup</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Fully managed infrastructure</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Secure by default</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Unlimited content updates</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Works on every device</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Automatic backups</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Always monitored</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Optimized for discoverability</div>
+              <div class="bp-item"><span class="bp-item-check">&#10003;</span> Priority WhatsApp support</div>
+            </div>
           </div>
-          <div class="included-item rv stagger" style="--i:1">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Domain name setup
+          <div class="bp-divider">
+            <div class="bp-notch bp-notch-top"></div>
+            <div class="bp-notch bp-notch-bot"></div>
           </div>
-          <div class="included-item rv stagger" style="--i:2">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Fast, reliable hosting
+          <div class="bp-stub">
+            <span class="bp-stub-code">EDU</span>
+            <span class="bp-stub-plan">All-Inclusive</span>
+            <span class="bp-stub-line"></span>
+            <span class="bp-stub-note">Full stack.<br>Zero gaps.</span>
+            <div class="bp-barcode">
+              <div class="bp-bar" style="height:70%"></div>
+              <div class="bp-bar" style="height:100%"></div>
+              <div class="bp-bar" style="height:40%"></div>
+              <div class="bp-bar" style="height:85%"></div>
+              <div class="bp-bar" style="height:55%"></div>
+              <div class="bp-bar" style="height:100%"></div>
+              <div class="bp-bar" style="height:30%"></div>
+              <div class="bp-bar" style="height:90%"></div>
+              <div class="bp-bar" style="height:65%"></div>
+              <div class="bp-bar" style="height:100%"></div>
+              <div class="bp-bar" style="height:45%"></div>
+              <div class="bp-bar" style="height:80%"></div>
+              <div class="bp-bar" style="height:100%"></div>
+              <div class="bp-bar" style="height:35%"></div>
+              <div class="bp-bar" style="height:75%"></div>
+              <div class="bp-bar" style="height:50%"></div>
+              <div class="bp-bar" style="height:100%"></div>
+              <div class="bp-bar" style="height:60%"></div>
+              <div class="bp-bar" style="height:90%"></div>
+              <div class="bp-bar" style="height:45%"></div>
+            </div>
           </div>
-          <div class="included-item rv stagger" style="--i:3">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            SSL certificate (HTTPS)
-          </div>
-          <div class="included-item rv stagger" style="--i:4">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Unlimited content updates
-          </div>
-          <div class="included-item rv stagger" style="--i:5">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Mobile responsive design
-          </div>
-          <div class="included-item rv stagger" style="--i:6">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Daily backups
-          </div>
-          <div class="included-item rv stagger" style="--i:7">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Uptime monitoring
-          </div>
-          <div class="included-item rv stagger" style="--i:8">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            SEO optimized
-          </div>
-          <div class="included-item rv stagger" style="--i:9">
-            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            Priority WhatsApp support
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-    <section class="section pricing-section" id="pricing">
-      <div class="shell">
-        <div class="section-header" style="text-align:center;">
-          <div class="section-tag rv" style="text-align:center;">Pricing</div>
-          <h2 class="section-h rv" style="margin-left:auto;margin-right:auto;">Simple pricing, no surprises.</h2>
-        </div>
-        <div class="pricing-card rv">
-          <h3>Let's talk about your institution.</h3>
-          <p>Every institution is different. We'll understand your needs and give you a clear, fixed monthly price — no hidden fees, no setup costs.</p>
-          <div class="pricing-perks">
-            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> No setup fees</span>
-            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> No contracts</span>
-            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Cancel anytime</span>
-            <span class="pricing-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Everything included</span>
-          </div>
-          <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Pricing+Enquiry&body=Hi+Opract%2C%0A%0AI%27d+like+to+know+the+pricing+for+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary">
-            Get a quote
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
-          </a>
         </div>
       </div>
     </section>
@@ -935,12 +979,12 @@
           <h2 class="section-h rv" style="margin-left:auto;margin-right:auto;">Questions answered.</h2>
         </div>
         <div class="faq-list">
-          <div class="faq-item rv"><button class="faq-q">Do we need any technical knowledge? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>None at all. You tell us what to change over WhatsApp or email — we handle every technical detail. Think of us as your IT department for the website.</p></div></div>
-          <div class="faq-item rv"><button class="faq-q">How long does it take to build the website? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Most websites are live within 7-10 days after we receive your content and branding. Complex institutions with many departments may take up to 2 weeks.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">Do we need any technical knowledge? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>None at all. You tell us what to change over WhatsApp or email — we handle every technical detail. Think of us as your permanent IT department.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">How long does it take to get started? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Most institutions are up and running within 7-10 days after we receive your content and branding. Complex setups with many departments may take up to 2 weeks.</p></div></div>
           <div class="faq-item rv"><button class="faq-q">Can we update content ourselves? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>You don't need to. Just send us the update — new notice, event, photo, fee change — and we'll publish it within hours. Unlimited updates are included in every plan.</p></div></div>
-          <div class="faq-item rv"><button class="faq-q">What if we already have a website? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>We'll migrate your existing content and build a fresh, modern website. If you have an existing domain, we'll set it up to point to the new site seamlessly.</p></div></div>
-          <div class="faq-item rv"><button class="faq-q">What happens if we cancel? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>No lock-in. Cancel at the end of any billing period. Your site stays live until the period ends. We can also export your content if you want to move elsewhere.</p></div></div>
-          <div class="faq-item rv"><button class="faq-q">Do you provide the domain name? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Yes. We'll set up a professional domain for your institution (e.g., yourschool.edu.in or yourschool.com). Domain registration and renewal are included.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">What if we already have something in place? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>We'll migrate your existing content and set up everything fresh. The transition is seamless — we handle all the technical details.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">What happens if we cancel? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>No lock-in. Cancel at the end of any billing period. Your service stays active until the period ends. We can also export your content if you want to move elsewhere.</p></div></div>
+          <div class="faq-item rv"><button class="faq-q">Is everything really included? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Yes. Setup, design, infrastructure, security, updates, backups, monitoring, and support — everything is covered. No hidden costs, no extras.</p></div></div>
         </div>
       </div>
     </section>
@@ -948,9 +992,9 @@
     <!-- CTA -->
     <section class="cta-section">
       <div class="shell">
-        <h2 class="rv">Your institution deserves<br><em>a digital presence.</em></h2>
-        <p class="rv">Parents are searching. Students are comparing. Make sure your institution stands out — professionally, online.</p>
-        <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+a+website+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary rv">
+        <h2 class="rv">Your institution deserves<br><em>better technology.</em></h2>
+        <p class="rv">Parents are searching. Students are comparing. Make sure your institution stands out.</p>
+        <a href="https://mail.google.com/mail/?view=cm&to=hello@opract.com&su=Opract+Edu+%E2%80%94+Let%27s+Talk&body=Hi+Opract%2C%0A%0AI%27m+interested+in+Opract+Edu+for+our+institution.%0A%0AInstitution+name%3A+%0AType+(school%2Fcollege%2Fcoaching)%3A+%0ALocation%3A+%0A%0AThanks." target="_blank" rel="noopener" class="btn btn-primary rv">
           Let's talk
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M7 17l9.2-9.2"/><path d="M17 17V7H7"/></svg>
         </a>
@@ -968,6 +1012,7 @@
         <a href="https://www.linkedin.com/company/opract/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="/privacy">Privacy</a>
         <a href="/terms">Terms</a>
+        <a href="/refund">Refunds</a>
         <a href="https://opract.com" target="_blank" rel="noopener">Opract</a>
         <span>&copy; 2026</span>
       </div>
@@ -976,6 +1021,12 @@
 
   <script>
     (function () {
+      /* HERO COLOR FLOW — activate after word entrance finishes */
+      setTimeout(function () {
+        var h1 = document.querySelector('.hero h1');
+        if (h1) h1.classList.add('glow');
+      }, 1600);
+
       /* NAV SCROLL */
       var nav = document.getElementById('nav');
       var progress = document.getElementById('scrollProgress');
@@ -1028,6 +1079,241 @@
           }
         });
       });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      var c = document.getElementById('fieldCanvas');
+      var ctx = c.getContext('2d');
+      var W, H, dpr;
+
+      function resize(){
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        c.width = W * dpr;
+        c.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var poles = [
+        {x:0, y:0, charge:1.2, bx:0.18, by:0.25, vx:0.15, vy:0.10, phX:0, phY:0.5},
+        {x:0, y:0, charge:-1.0, bx:0.82, by:0.72, vx:-0.12, vy:-0.08, phX:1.2, phY:0.3},
+        {x:0, y:0, charge:0.8, bx:0.52, by:0.12, vx:0.08, vy:0.16, phX:2.4, phY:1.8},
+        {x:0, y:0, charge:-0.9, bx:0.68, by:0.48, vx:-0.09, vy:0.12, phX:0.7, phY:2.1},
+        {x:0, y:0, charge:0.6, bx:0.30, by:0.75, vx:0.11, vy:-0.07, phX:3.1, phY:0.9},
+        {x:0, y:0, charge:-0.5, bx:0.88, by:0.22, vx:-0.06, vy:0.09, phX:1.8, phY:2.7}
+      ];
+
+      var LAYERS = [
+        {count:160, speed:0.35, width:0.5, alpha:0.10, hue:178, sat:50},
+        {count:130, speed:0.6, width:1.0, alpha:0.18, hue:172, sat:65},
+        {count:80, speed:1.0, width:1.8, alpha:0.28, hue:166, sat:75},
+        {count:35, speed:1.5, width:2.8, alpha:0.38, hue:158, sat:60}
+      ];
+
+      var particles = [];
+      LAYERS.forEach(function(layer, li){
+        for(var i = 0; i < layer.count; i++){
+          particles.push({
+            x: Math.random() * 2000,
+            y: Math.random() * 2000,
+            ox: 0, oy: 0,
+            life: Math.random() * 300,
+            maxLife: 180 + Math.random() * 180,
+            layer: li,
+            trail: [],
+            trailLen: 8 + Math.floor(Math.random() * (li === 3 ? 30 : 18)),
+            pulse: 0
+          });
+        }
+      });
+
+      var glows = [];
+      for(var g = 0; g < 12; g++){
+        glows.push({
+          x: Math.random() * 2000,
+          y: Math.random() * 2000,
+          r: 40 + Math.random() * 100,
+          alpha: 0,
+          maxAlpha: 0.04 + Math.random() * 0.04,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.006 + Math.random() * 0.01,
+          drift: 0.2 + Math.random() * 0.4
+        });
+      }
+
+      var orbs = [];
+      for(var o = 0; o < 18; o++){
+        orbs.push({
+          x: Math.random() * 2000,
+          y: Math.random() * 2000,
+          r: 2 + Math.random() * 4,
+          baseAlpha: 0.06 + Math.random() * 0.12,
+          phase: Math.random() * Math.PI * 2,
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.25,
+          pulseSpeed: 0.01 + Math.random() * 0.02,
+          hue: 160 + Math.random() * 20
+        });
+      }
+
+      var time = 0;
+
+      function draw(){
+        time += 0.006;
+        ctx.fillStyle = 'rgba(248,250,251,0.18)';
+        ctx.fillRect(0, 0, W, H);
+
+        poles.forEach(function(p){
+          p.x = p.bx * W + Math.sin(time * 0.7 + p.phX) * W * 0.06;
+          p.y = p.by * H + Math.cos(time * 0.5 + p.phY) * H * 0.06;
+        });
+
+        glows.forEach(function(g){
+          g.phase += g.speed;
+          g.alpha = g.maxAlpha * (0.5 + 0.5 * Math.sin(g.phase));
+          g.x += Math.sin(g.phase * 1.3) * g.drift;
+          g.y += Math.cos(g.phase * 0.9) * g.drift;
+          if(g.alpha > 0.005){
+            var grad = ctx.createRadialGradient(g.x, g.y, 0, g.x, g.y, g.r);
+            grad.addColorStop(0, 'rgba(15,118,110,' + g.alpha + ')');
+            grad.addColorStop(1, 'rgba(15,118,110,0)');
+            ctx.beginPath();
+            ctx.arc(g.x, g.y, g.r, 0, Math.PI*2);
+            ctx.fillStyle = grad;
+            ctx.fill();
+          }
+        });
+
+        orbs.forEach(function(ob){
+          ob.phase += ob.pulseSpeed;
+          ob.x += ob.speedX;
+          ob.y += ob.speedY;
+          if(ob.x < -20) ob.x = W + 20;
+          if(ob.x > W + 20) ob.x = -20;
+          if(ob.y < -20) ob.y = H + 20;
+          if(ob.y > H + 20) ob.y = -20;
+          var oa = ob.baseAlpha * (0.4 + 0.6 * Math.sin(ob.phase));
+          if(oa > 0.01){
+            var og = ctx.createRadialGradient(ob.x, ob.y, 0, ob.x, ob.y, ob.r * 3);
+            og.addColorStop(0, 'hsla(' + ob.hue + ',70%,45%,' + oa + ')');
+            og.addColorStop(0.4, 'hsla(' + ob.hue + ',60%,50%,' + (oa*0.4) + ')');
+            og.addColorStop(1, 'hsla(' + ob.hue + ',50%,55%,0)');
+            ctx.beginPath();
+            ctx.arc(ob.x, ob.y, ob.r * 3, 0, Math.PI*2);
+            ctx.fillStyle = og;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(ob.x, ob.y, ob.r, 0, Math.PI*2);
+            ctx.fillStyle = 'hsla(' + ob.hue + ',75%,55%,' + (oa*0.6) + ')';
+            ctx.fill();
+          }
+        });
+
+        poles.forEach(function(p){
+          if(Math.abs(p.charge) > 0.7){
+            var pr = 20 + Math.abs(p.charge) * 15;
+            var pa = 0.015 + 0.01 * Math.sin(time * 3 + p.phX);
+            var pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, pr);
+            pg.addColorStop(0, 'rgba(15,118,110,' + pa + ')');
+            pg.addColorStop(1, 'rgba(15,118,110,0)');
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, pr, 0, Math.PI*2);
+            ctx.fillStyle = pg;
+            ctx.fill();
+          }
+        });
+
+        particles.forEach(function(pt){
+          var layer = LAYERS[pt.layer];
+          var fx = 0, fy = 0;
+
+          poles.forEach(function(pole){
+            var dx = pole.x - pt.x;
+            var dy = pole.y - pt.y;
+            var dist = Math.sqrt(dx*dx + dy*dy) + 40;
+            var force = pole.charge * 120 / (dist);
+            var perpX = -dy / dist;
+            var perpY = dx / dist;
+            var radX = dx / dist;
+            var radY = dy / dist;
+            fx += perpX * force * 0.7 + radX * force * 0.3;
+            fy += perpY * force * 0.7 + radY * force * 0.3;
+          });
+
+          var mag = Math.sqrt(fx*fx + fy*fy) + 0.001;
+          var nx = fx / mag;
+          var ny = fy / mag;
+          var spd = layer.speed * Math.min(mag * 0.5, 2.5);
+
+          pt.ox = pt.x;
+          pt.oy = pt.y;
+          pt.x += nx * spd;
+          pt.y += ny * spd;
+
+          pt.trail.push({x: pt.x, y: pt.y});
+          if(pt.trail.length > pt.trailLen) pt.trail.shift();
+
+          pt.life++;
+          pt.pulse = Math.max(0, pt.pulse - 0.02);
+
+          var closestDist = Infinity;
+          poles.forEach(function(pole){
+            var dd = Math.sqrt((pole.x-pt.x)*(pole.x-pt.x)+(pole.y-pt.y)*(pole.y-pt.y));
+            if(dd < closestDist) closestDist = dd;
+          });
+          if(closestDist < 50) pt.pulse = Math.min(1, pt.pulse + 0.15);
+
+          if(pt.life > pt.maxLife || pt.x < -30 || pt.x > W+30 || pt.y < -30 || pt.y > H+30){
+            pt.x = Math.random() * W;
+            pt.y = Math.random() * H;
+            pt.ox = pt.x;
+            pt.oy = pt.y;
+            pt.trail = [];
+            pt.life = 0;
+            pt.pulse = 0;
+          }
+
+          if(pt.trail.length > 1){
+            var lifeFade = 1 - (pt.life / pt.maxLife);
+            var baseAlpha = layer.alpha * Math.min(lifeFade * 2, 1);
+            var pulseBoost = 1 + pt.pulse * 2;
+
+            ctx.beginPath();
+            ctx.moveTo(pt.trail[0].x, pt.trail[0].y);
+            for(var ti = 1; ti < pt.trail.length; ti++){
+              ctx.lineTo(pt.trail[ti].x, pt.trail[ti].y);
+            }
+            var a = Math.min(0.5, baseAlpha * pulseBoost);
+            var h = layer.hue + Math.sin(pt.life * 0.02) * 8;
+            ctx.strokeStyle = 'hsla(' + h + ',' + layer.sat + '%,38%,' + a + ')';
+            ctx.lineWidth = layer.width * (0.6 + pulseBoost * 0.4);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            if(pt.pulse > 0.3){
+              var lastPt = pt.trail[pt.trail.length - 1];
+              var dotR = 1.5 + pt.pulse * 2;
+              var dotA = pt.pulse * 0.3;
+              ctx.beginPath();
+              ctx.arc(lastPt.x, lastPt.y, dotR, 0, Math.PI*2);
+              ctx.fillStyle = 'hsla(' + h + ',' + layer.sat + '%,50%,' + dotA + ')';
+              ctx.fill();
+            }
+          }
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      ctx.fillStyle = '#f8fafb';
+      ctx.fillRect(0, 0, W, H);
+      requestAnimationFrame(draw);
     })();
   </script>
 
